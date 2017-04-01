@@ -86,3 +86,47 @@ POST skillsuggest_test/skilltype_test
    }
 }
 ```
+
+**An example with an aggregation**
+
+Here's something that compares aggregation results with other results content.
+
+Query:
+
+```
+{
+ "query": {
+  "bool": {
+   "must": [
+     "_DASHBOARD_CONTEXT_"
+   ]
+  }
+ },
+ "size": 0,
+ "aggs" : {
+    "parse_failures" : {
+       "filter" : { "term": { "tags.keyword": "_fail" } }
+    }
+ }
+}
+```
+
+Javascript:
+
+```
+({
+    percent_fail: function() {
+        return Math.round((this.aggregations.parse_failures.doc_count / this.hits.total) * 100);
+    }
+})
+```
+
+Mustache:
+
+```
+<hr>
+ <b>Percent Failures: {{meta.percent_fail}}%</b><BR>
+ Total Hits: {{hits.total}}  <BR>
+ Failures: {{aggregations.parse_failures.doc_count}}
+<hr>
+```
