@@ -1,5 +1,11 @@
 A Kibana visualization plugin that allows arbitrary query results to be processed by a [Mustache](https://mustache.github.io/) transform.
 
+Installation for Kibana 5.2.2:
+
+```
+bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/5.2.2/transform_vis-5.2.2.zip
+```
+
 ![Transform Vis](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/transform_vis.png)
 
 **Support for Javascript**
