@@ -30,6 +30,7 @@ Named functions can then be called by mustache, like:
 ```
 
 **Query DSL**
+
 `"_DASHBOARD_CONTEXT_"`, including the surrounding quotes, will be replaced by a bool query that represents the filter/search state of the dashboard in context.  
 
 This example is given to demonstrate how the dashboard context can co-exist with your own query clauses, but you are not restricted to this format.
