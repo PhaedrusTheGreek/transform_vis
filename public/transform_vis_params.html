@@ -2,8 +2,8 @@
      style="width: 100%;">
 
             <div class="form-group">
-		 <label>Index Pattern</label>
-                 <div> <input type="text" ng-model="$parent.vis.params.outputs.indexpattern" class="form-control ng-pristine ng-untouched ng-valid"> </div>
+		    <label> Index Pattern </label> 
+		    <select name="indexPattern" class="form-control ng-pristine ng-untouched" ng-model="$parent.vis.params.outputs.indexpattern" required ng-options="option as option for option in indexPatternOptions"></select>
             </div>
 
             <div class="form-group">

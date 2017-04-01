@@ -19,9 +19,7 @@ function TransformVisProvider(Private) {
     template: transformVisTemplate,
     params: {
       defaults: {
-        handleNoResults: true,
 	outputs : {
-         indexpattern: '*',
          meta: '({\n count_hits: function() {\n  return this.hits.total;\n }\n})',
          querydsl: '{\n "query": {\n  "bool": {\n   "must": [\n   ' + 
             '  "_DASHBOARD_CONTEXT_"\n   ]\n  }\n }\n}',
@@ -30,8 +28,9 @@ function TransformVisProvider(Private) {
       },
       editor: transformVisParamsTemplate
     },
-    //implementsRenderComplete: true,
-    requiresSearch: false
+    implementsRenderComplete: true,
+    requiresSearch: false,
+    requiresIndexPatternSelection: true
   });
 }
 
