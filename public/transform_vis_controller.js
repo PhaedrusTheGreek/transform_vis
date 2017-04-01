@@ -24,7 +24,6 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 
     $scope.search = function() {
 
-	console.log("preparing search");
 	var context = dashboardContext();
 	var index = $scope.vis.params.outputs.indexpattern;
 
