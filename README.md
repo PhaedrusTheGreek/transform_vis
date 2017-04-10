@@ -131,3 +131,50 @@ Mustache:
  Failures: {{aggregations.parse_failures.doc_count}}
 <hr>
 ```
+
+**An example with presenting hits via field collapsing**
+Elasticsearch 5.3 Introduces [Field Collapsing](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/search-request-collapse.html).  Here's an example of displaying `Chrome` processes from Metricbeat logs.  We might have a bunch of logs for the same PID, but with Field collapsing we can easily make sure we only see the most recent (see `sort`) log from each PID.
+
+Query:
+
+```
+{
+   "size": 5,
+   "query": {
+      "bool": {
+         "must": [
+            "_DASHBOARD_CONTEXT_",
+            {
+               "regexp": {
+                  "system.process.cmdline": ".*Chrome.*"
+               }
+            }
+         ]
+      }
+   },
+   "collapse": {
+      "field": "system.process.pid"
+   },
+   "sort": {
+      "@timestamp": {
+         "order": "desc"
+      }
+   }
+}
+```
+
+Mustache:
+
+```
+<hr>
+<table width=100% border=1>
+{{#hits.hits}} 
+<tr>
+ <td> {{_source.system.process.name}} </td>
+ <td> {{_source.system.process.pid}} </td>
+ <td> {{_source.system.process.cmdline}} </td>
+</tr>
+{{/hits.hits}} 
+</table>
+<hr>
+```
