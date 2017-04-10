@@ -180,7 +180,7 @@ Mustache:
 <hr>
 ```
 
-** An example with Pre-processing **
+**An example with Pre-processing**
 
 Awesomely, if you call a Javascript function at the beginning of your Mustache template, you can actually modify the query results object by Javascript.   Here is an example that calculates the difference in time between each event.
 
