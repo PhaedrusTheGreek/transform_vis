@@ -1,10 +1,19 @@
 A Kibana visualization plugin that allows arbitrary query results to be processed by a [Mustache](https://mustache.github.io/) transform.
 
+* [Support for Javascript](#support-for-javascript)
+* [Query DSL](#query-dsl)
+* Examples
+   * [An example with an aggregation](#an-example-with-an-aggregation)
+   * [An example with presenting hits via field collapsing](#an-example-with-presenting-hits-via-field-collapsing)
+   * [An example with Pre-processing](#an-example-with-pre-processing)
+* [Debugging](#debugging)
+
 Installation for Kibana 5.3.0:
 
 ```
 bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/5.3.0/transform_vis-5.3.0.zip
 ```
+
 
 ![Transform Vis](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/transform_vis.png)
 
