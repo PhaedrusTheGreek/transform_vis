@@ -8,7 +8,7 @@ bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/rele
 
 ![Transform Vis](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/transform_vis.png)
 
-**Support for Javascript**
+## Support for Javascript
 
 By default, no unsafe HTML (such as `<script> tags`) will be allowed, as processed by Angular's [$sanitize](https://docs.angularjs.org/api/ngSanitize/service/$sanitize) , but Javascript processing can be achieved by acknowledging the client-side security risk in `kibana.yml` with `transform_vis.allow_unsafe: true`.   When enabled, a "Javscript" box appears that allows you to create a special object that will be merged with the query's response object under the field name `meta`.
 
@@ -29,7 +29,7 @@ Named functions can then be called by mustache, like:
 <hr>{{meta.count_hits}} total hits<hr>
 ```
 
-**Query DSL**
+## Query DSL
 
 `"_DASHBOARD_CONTEXT_"`, including the surrounding quotes, will be replaced by a bool query that represents the filter/search state of the dashboard in context.  
 
@@ -88,7 +88,7 @@ POST skillsuggest_test/skilltype_test
 }
 ```
 
-**An example with an aggregation**
+## An example with an aggregation
 
 Here's something that compares aggregation results with other results content.
 
@@ -132,7 +132,7 @@ Mustache:
 <hr>
 ```
 
-**An example with presenting hits via field collapsing**
+## An example with presenting hits via field collapsing
 
 Elasticsearch 5.3 Introduces [Field Collapsing](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/search-request-collapse.html).  Here's an example of displaying `Chrome` processes from Metricbeat logs.  We might have a bunch of logs for the same PID, but with Field collapsing we can easily make sure we only see the most recent (see `sort`) log from each PID.
 
@@ -180,7 +180,7 @@ Mustache:
 <hr>
 ```
 
-**An example with Pre-processing**
+## An example with Pre-processing
 
 Awesomely, if you call a Javascript function at the beginning of your Mustache template, you can actually modify the query results object.   Here is an example that calculates the difference in time between each event.
 
@@ -252,7 +252,7 @@ Mustache:
 ![Demo Dashboard](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/Demo.png)
 
 
-**Debugging**
+## Debugging
 
 You can dump the response object to a `<pre>` tag in your visualization output while testing, for convenience.
 
