@@ -250,3 +250,32 @@ Mustache:
 ```
 
 ![Demo Dashboard](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/Demo.png)
+
+
+**Debugging**
+
+You can dump the response object to a `<pre>` tag in your visualization output while testing, for convenience.
+
+```
+({
+ count_hits: function() {
+  return this.hits.hits.length;
+ },
+ debug: function() {
+  return JSON.stringify(this, null, ' ');
+ } 
+})
+```
+
+Mustache:
+
+```
+<hr>
+  {{hits.total}} total hits<BR>
+  {{meta.count_hits}} returned hits<BR>
+<hr>
+
+<pre>
+{{meta.debug}}
+</pre>
+```
