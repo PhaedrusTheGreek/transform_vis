@@ -133,6 +133,7 @@ Mustache:
 ```
 
 **An example with presenting hits via field collapsing**
+
 Elasticsearch 5.3 Introduces [Field Collapsing](https://www.elastic.co/guide/en/elasticsearch/reference/5.3/search-request-collapse.html).  Here's an example of displaying `Chrome` processes from Metricbeat logs.  We might have a bunch of logs for the same PID, but with Field collapsing we can easily make sure we only see the most recent (see `sort`) log from each PID.
 
 Query:
