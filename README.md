@@ -179,3 +179,72 @@ Mustache:
 </table>
 <hr>
 ```
+
+** An example with Pre-processing **
+
+Awesomely, if you call a Javascript function at the beginning of your Mustache template, you can actually modify the query results object by Javascript.   Here is an example that calculates the difference in time between each event.
+
+Query:
+
+```
+{
+   "size": 5,
+   "query": {
+      "bool": {
+         "must": [
+            "_DASHBOARD_CONTEXT_"
+         ]
+      }
+   },
+
+   "sort": {
+      "@timestamp": {
+         "order": "desc"
+      }
+   }
+}
+```
+
+Javascript:
+
+```
+({
+ modify: function() {
+  var last_timestamp;
+  this.hits.hits.forEach(function(element) {
+    var this_timestamp = element._source['@timestamp'];
+    console.log(last_timestamp);
+    if (last_timestamp) {
+         element._diff_seconds = (new Date(last_timestamp).getTime() - new Date(this_timestamp).getTime()) / 1000 
+    }
+    last_timestamp = this_timestamp;
+     
+  });
+  return "Modification Complete";
+ }
+})
+```
+
+Mustache:
+
+```
+{{meta.modify}}
+
+<hr>
+<table width=100% border=1>
+<tr>
+ <th> Process Name </th>
+ <th> Timetsamp </th>
+ <th> Difference </th>
+</tr>
+{{#hits.hits}} 
+<tr>
+ <td> {{_source.system.process.name}} </td>
+ <td> {{_source.@timestamp}} </td>
+ <td> {{_diff_seconds}} </td>
+</tr>
+{{/hits.hits}} 
+</table>
+<hr>  
+
+```
