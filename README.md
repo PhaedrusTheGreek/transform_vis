@@ -1,6 +1,7 @@
 A Kibana visualization plugin that allows arbitrary query results to be processed by a [Mustache](https://mustache.github.io/) transform.
 
 * [Support for Javascript](#support-for-javascript)
+* [Support for Javascript](#support-for-css)
 * [Query DSL](#query-dsl)
 * Examples
    * [An example with an aggregation](#an-example-with-an-aggregation)
@@ -37,6 +38,10 @@ Named functions can then be called by mustache, like:
 ```
 <hr>{{meta.count_hits}} total hits<hr>
 ```
+
+## Support for CSS
+
+`<style>` tags can be embedded in the mustache template, but requires `transform_vis.allow_unsafe: true` in `kibana.yml`
 
 ## Query DSL
 
