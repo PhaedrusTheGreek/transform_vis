@@ -13,6 +13,14 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
     const dashboardContext = Private(require('plugins/timelion/services/dashboard_context'));
      
     $scope.options = chrome.getInjected('transformVisOptions');
+
+    $scope.applyHTML = function() {
+         if ($scope.options.allow_unsafe) {
+	 	return $sce.trustAsHtml($scope.vis.display);
+	} else {
+		return $scope.vis.display;
+	}
+    }
      
     $scope.refreshConfig = function() {
 
@@ -20,6 +28,10 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 		$scope.vis.indexPattern = indexPattern;
 	}).then($scope.search);
 
+    }
+     
+    $scope.setDisplay = function(text) {
+	    $scope.vis.display = text;
     }
 
     $scope.search = function() {
@@ -29,7 +41,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 
 	// This is part of what should be a wider config validation
 	if (!(typeof index === 'string' || index instanceof String)) {
-		$scope.vis.display = "<center><i>No Index Pattern</i></center>";
+		$scope.setDisplay("<center><i>No Index Pattern</i></center>");
 		return;
         }    
 
@@ -39,21 +51,32 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 	 context.bool.must.push(timefilterdsl);
 	}
 	
-        var body = $scope.vis.params.outputs.querydsl.replace("\"_DASHBOARD_CONTEXT_\"",JSON.stringify(context));
+        var body = JSON.parse( $scope.vis.params.outputs.querydsl.replace("\"_DASHBOARD_CONTEXT_\"",JSON.stringify(context)) );
 
 	es.search({
 		index: index,
-		body: JSON.parse(body)
+		body: body
 	}, function (error, response) {
 		if (error) {
-		 $scope.vis.display = "Error (See Console)";
+		 $scope.setDisplay("Error (See Console)");
 		 console.log("Elasticsearch Query Error", error);
 		} else {
+		  var bindme = {};
+		  bindme.context = context;
+		  bindme.response = response;
+		  bindme.error = error;
 	          if ($scope.options.allow_unsafe) {
-			response.meta = eval($scope.vis.params.outputs.meta);
+			try {
+			  bindme.meta = eval($scope.vis.params.outputs.meta);
+			} catch(jserr) {
+			  bindme.jserr = jserr;
+			  $scope.setDisplay("Error (See Console)");
+		 	  console.log("Javascript Compilation Error", jserr);
+			  return; // Abort!
+			}
 	   	  } 
 		  var formula = $scope.vis.params.outputs.formula;
-                  $scope.vis.display = Mustache.render(formula, response);
+                  $scope.setDisplay(Mustache.render(formula, bindme));
 		}
 	});
     

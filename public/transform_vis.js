@@ -20,10 +20,10 @@ function TransformVisProvider(Private) {
     params: {
       defaults: {
 	outputs : {
-         meta: '({\n count_hits: function() {\n  return this.hits.total;\n }\n})',
+         meta: '({\n count_hits: function() {\n  return this.response.hits.total;\n }\n})',
          querydsl: '{\n "query": {\n  "bool": {\n   "must": [\n   ' + 
             '  "_DASHBOARD_CONTEXT_"\n   ]\n  }\n }\n}',
-         formula: '<hr>{{hits.total}} total hits<hr>'
+         formula: '<hr>{{response.hits.total}} total hits<hr>'
 	}
       },
       editor: transformVisParamsTemplate

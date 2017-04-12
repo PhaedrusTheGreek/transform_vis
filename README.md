@@ -27,7 +27,7 @@ Any Javascript given will be executed by the web browser, however in order to be
 ({
  some_var: 42,
  count_hits: function() {
-  return this.hits.total;
+  return this.response.hits.total;
  }
 })
 ```
@@ -126,7 +126,7 @@ Javascript:
 ```
 ({
     percent_fail: function() {
-        return Math.round((this.aggregations.parse_failures.doc_count / this.hits.total) * 100);
+        return Math.round((this.response.aggregations.parse_failures.doc_count / this.response.hits.total) * 100);
     }
 })
 ```
@@ -178,13 +178,13 @@ Mustache:
 ```
 <hr>
 <table width=100% border=1>
-{{#hits.hits}} 
+{{#response.hits.hits}} 
 <tr>
  <td> {{_source.system.process.name}} </td>
  <td> {{_source.system.process.pid}} </td>
  <td> {{_source.system.process.cmdline}} </td>
 </tr>
-{{/hits.hits}} 
+{{/response.hits.hits}} 
 </table>
 <hr>
 ```
@@ -220,7 +220,7 @@ Javascript:
 ({
  modify: function() {
   var last_timestamp;
-  this.hits.hits.forEach(function(element) {
+  this.response.hits.hits.forEach(function(element) {
     var this_timestamp = element._source['@timestamp'];
     console.log(last_timestamp);
     if (last_timestamp) {
@@ -246,13 +246,13 @@ Mustache:
  <th> Timetsamp </th>
  <th> Difference </th>
 </tr>
-{{#hits.hits}} 
+{{#response.hits.hits}} 
 <tr>
  <td> {{_source.system.process.name}} </td>
  <td> {{_source.@timestamp}} </td>
  <td> {{_diff_seconds}} </td>
 </tr>
-{{/hits.hits}} 
+{{/response.hits.hits}} 
 </table>
 <hr>  
 
@@ -268,7 +268,7 @@ You can dump the response object to a `<pre>` tag in your visualization output w
 ```
 ({
  count_hits: function() {
-  return this.hits.hits.length;
+  return this.response.hits.hits.length;
  },
  debug: function() {
   return JSON.stringify(this, null, ' ');
@@ -280,7 +280,7 @@ Mustache:
 
 ```
 <hr>
-  {{hits.total}} total hits<BR>
+  {{response.hits.total}} total hits<BR>
   {{meta.count_hits}} returned hits<BR>
 <hr>
 
