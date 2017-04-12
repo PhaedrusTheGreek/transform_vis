@@ -1,7 +1,7 @@
 A Kibana visualization plugin that allows arbitrary query results to be processed by a [Mustache](https://mustache.github.io/) transform.
 
 * [Support for Javascript](#support-for-javascript)
-* [Support for Javascript](#support-for-css)
+* [Support for CSS](#support-for-css)
 * [Query DSL](#query-dsl)
 * Examples
    * [An example with an aggregation](#an-example-with-an-aggregation)
