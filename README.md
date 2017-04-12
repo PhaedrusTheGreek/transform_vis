@@ -11,7 +11,7 @@ A Kibana visualization plugin that allows arbitrary query results to be processe
 Installation for Kibana 5.3.0:
 
 ```
-bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/5.3.0/transform_vis-5.3.0.zip
+bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/5.3.0-2/transform_vis-5.3.0-2.zip
 ```
 
 
