@@ -1,5 +1,6 @@
 A Kibana visualization plugin that allows arbitrary query results to be processed by a [Mustache](https://mustache.github.io/) transform.
 
+* [Variable Binding](#variable-binding)
 * [Support for Javascript](#support-for-javascript)
 * [Support for CSS](#support-for-css)
 * [Query DSL](#query-dsl)
@@ -17,6 +18,23 @@ bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/rele
 
 
 ![Transform Vis](https://raw.githubusercontent.com/PhaedrusTheGreek/transform_vis/master/transform_vis.png)
+
+## Variable Binding
+
+The object passed to the mustache template looks like this:
+
+```
+{
+  response: { .. } // The Query Response exactly as returned from Elasticsearch
+  context: { .. } // The dashboard context (contains filters, query string, time range)
+  meta: { .. } // Your Javascript Object
+}
+```
+
+From mustache, you can access these variables directly.  From the Javascript Object, you can access 
+
+From the Javascript object, they're available via `this`, e.g., `this.response`
+
 
 ## Support for Javascript
 
