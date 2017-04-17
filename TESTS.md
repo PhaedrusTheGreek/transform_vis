@@ -1,6 +1,6 @@
 Should be automated at some point, but for the time being:
 
-**1) Style Tags Test**
+## 1) Style Tags Test
 
 `<style>` tags should be ignored in Mustache/HTML without `transform_vis.allow_unsafe` 
 
@@ -20,8 +20,7 @@ Should be automated at some point, but for the time being:
 - with `transform_vis.allow_unsafe` - Expected Result: The font size should be 40px
 - without `transform_vis.allow_unsafe` - Expected Result: The font size should not be 40px
 
-
-**2) Javascript Test**
+## 2) Javascript Test
 
 ```
 ({
