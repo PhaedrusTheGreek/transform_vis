@@ -38,7 +38,7 @@ Should be automated at some point, but for the time being:
 
 Result:   
 - with `transform_vis.allow_unsafe` - Expected Result: "Hello World!"
-- without `transform_vis.allow_unsafe` - Expected Result: `meta` variable does not exist
+- without `transform_vis.allow_unsafe` - Expected Result: Nothing Displayed 
 
 
 ## Source
