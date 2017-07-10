@@ -1,7 +1,10 @@
 import _ from 'lodash';
-import AggResponseTabifyTabifyProvider from 'ui/agg_response/tabify/tabify';
-import uiModules from 'ui/modules';
+//import { AggResponseTabifyProvider } from 'ui/agg_response/tabify/tabify';
+import { uiModules } from 'ui/modules';
+import { FilterBarQueryFilterProvider } from 'ui/filter_bar/query_filter'
+import { dashboardContextProvider } from 'plugins/kibana/dashboard/dashboard_context'
 import chrome from 'ui/chrome';
+
 const Mustache = require('mustache')
 const module = uiModules.get('kibana/transform_vis', ['kibana']);
 
@@ -9,24 +12,24 @@ require('plugins/transform_vis/directives/refresh_hack');
 
 module.controller('TransformVisController', function ($scope, $sce, Private, timefilter, es, config, indexPatterns) {
 
-    const queryFilter = Private(require('ui/filter_bar/query_filter'));
-    const dashboardContext = Private(require('plugins/timelion/services/dashboard_context'));
+    const queryFilter = Private(FilterBarQueryFilterProvider);
+    const dashboardContext = Private(dashboardContextProvider);
      
     $scope.options = chrome.getInjected('transformVisOptions');
 
     $scope.applyHTML = function() {
-         if ($scope.options.allow_unsafe) {
-	 	return $sce.trustAsHtml($scope.vis.display);
-	} else {
-		return $scope.vis.display;
-	}
+        if ($scope.options.allow_unsafe) {
+            return $sce.trustAsHtml($scope.vis.display);
+        } else {
+            return $scope.vis.display;
+        }
     }
      
     $scope.refreshConfig = function() {
 
-	indexPatterns.get($scope.vis.params.outputs.indexpattern).then( function (indexPattern) {
-		$scope.vis.indexPattern = indexPattern;
-	}).then($scope.search);
+		indexPatterns.get($scope.vis.params.outputs.indexpattern).then( function (indexPattern) {
+			$scope.vis.indexPattern = indexPattern;
+		}).then($scope.search);
 
     }
      
@@ -43,15 +46,15 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 	if (!(typeof index === 'string' || index instanceof String)) {
 		$scope.setDisplay("<center><i>No Index Pattern</i></center>");
 		return;
-        }    
+    }    
 
-	if ($scope.vis.indexPattern.timeFieldName) {
+	if ($scope.vis.indexPattern && $scope.vis.indexPattern.timeFieldName) {
 	 const timefilterdsl = { range:{} };
 	 timefilterdsl.range[$scope.vis.indexPattern.timeFieldName] = { gte: timefilter.time.from, lte: timefilter.time.to };
 	 context.bool.must.push(timefilterdsl);
 	}
 	
-        var body = JSON.parse( $scope.vis.params.outputs.querydsl.replace("\"_DASHBOARD_CONTEXT_\"",JSON.stringify(context)) );
+    var body = JSON.parse( $scope.vis.params.outputs.querydsl.replace("\"_DASHBOARD_CONTEXT_\"",JSON.stringify(context)) );
 
 	es.search({
 		index: index,
