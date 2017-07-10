@@ -1,15 +1,16 @@
 import 'plugins/transform_vis/transform_vis.less';
 import 'plugins/transform_vis/transform_vis_controller';
-import TemplateVisTypeTemplateVisTypeProvider from 'ui/template_vis_type/template_vis_type';
+import { TemplateVisTypeProvider } from 'ui/template_vis_type/template_vis_type';
+import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
 import transformVisTemplate from 'plugins/transform_vis/transform_vis.html';
 import transformVisParamsTemplate from 'plugins/transform_vis/transform_vis_params.html';
 
 
 // register the provider with the visTypes registry
-require('ui/registry/vis_types').register(TransformVisProvider);
+VisTypesRegistryProvider.register(TransformVisProvider);
 
 function TransformVisProvider(Private) {
-  const TemplateVisType = Private(TemplateVisTypeTemplateVisTypeProvider);
+  const TemplateVisType = Private(TemplateVisTypeProvider);
 
   return new TemplateVisType({
     name: 'transform',

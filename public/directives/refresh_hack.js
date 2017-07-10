@@ -1,6 +1,8 @@
 import $ from 'jquery';
 
-const module = require('ui/modules').get('kibana/transform_vis', []);
+import { uiModules } from 'ui/modules';
+
+const module = uiModules.get('kibana/transform_vis', []);
 
 module.directive('refreshHack', function () {
   return {
