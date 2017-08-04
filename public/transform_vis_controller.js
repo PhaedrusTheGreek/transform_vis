@@ -38,8 +38,8 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 
   $scope.search = function () {
 
-    var context = dashboardContext();
-    var index = $scope.vis.params.outputs.indexpattern;
+    const context = dashboardContext();
+    const index = $scope.vis.params.outputs.indexpattern;
 
     // This is part of what should be a wider config validation
     if (!(typeof index === 'string' || index instanceof String)) {
@@ -53,7 +53,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
       context.bool.must.push(timefilterdsl);
     }
 
-    var body = JSON.parse($scope.vis.params.outputs.querydsl.replace('"_DASHBOARD_CONTEXT_"', JSON.stringify(context)));
+    const body = JSON.parse($scope.vis.params.outputs.querydsl.replace('"_DASHBOARD_CONTEXT_"', JSON.stringify(context)));
 
     es.search({
       index: index,
@@ -63,7 +63,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
         $scope.setDisplay("Error (See Console)");
         console.log("Elasticsearch Query Error", error);
       } else {
-        var bindme = {};
+        const bindme = {};
         bindme.context = context;
         bindme.response = response;
         bindme.error = error;
@@ -77,7 +77,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
             return; // Abort!
           }
         }
-        var formula = $scope.vis.params.outputs.formula;
+        const formula = $scope.vis.params.outputs.formula;
         $scope.setDisplay(Mustache.render(formula, bindme));
       }
     });
