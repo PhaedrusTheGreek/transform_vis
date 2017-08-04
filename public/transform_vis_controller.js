@@ -43,7 +43,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 
     // This is part of what should be a wider config validation
     if (!(typeof index === 'string' || index instanceof String)) {
-      $scope.setDisplay("<div style="text-align: center;"><i>No Index Pattern</i></div>");
+      $scope.setDisplay('<div style="text-align: center;"><i>No Index Pattern</i></div>');
       return;
     }
 
@@ -53,7 +53,7 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
       context.bool.must.push(timefilterdsl);
     }
 
-    var body = JSON.parse($scope.vis.params.outputs.querydsl.replace("\"_DASHBOARD_CONTEXT_\"", JSON.stringify(context)));
+    var body = JSON.parse($scope.vis.params.outputs.querydsl.replace('"_DASHBOARD_CONTEXT_"', JSON.stringify(context)));
 
     es.search({
       index: index,
