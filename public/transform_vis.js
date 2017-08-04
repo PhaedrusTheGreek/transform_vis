@@ -20,12 +20,23 @@ function TransformVisProvider(Private) {
     template: transformVisTemplate,
     params: {
       defaults: {
-	outputs : {
-         meta: '({\n count_hits: function() {\n  return this.response.hits.total;\n }\n})',
-         querydsl: '{\n "query": {\n  "bool": {\n   "must": [\n   ' + 
-            '  "_DASHBOARD_CONTEXT_"\n   ]\n  }\n }\n}',
-         formula: '<hr>{{response.hits.total}} total hits<hr>'
-	}
+        outputs: {
+          meta: `({
+ count_hits: function() {
+  return this.response.hits.total;
+ }
+})`,
+          querydsl: `{
+ "query": {
+  "bool": {
+   "must": [
+     "_DASHBOARD_CONTEXT_"
+   ]
+  }
+ }
+}`,
+          formula: '<hr>{{response.hits.total}} total hits<hr>'
+        }
       },
       editor: transformVisParamsTemplate
     },
