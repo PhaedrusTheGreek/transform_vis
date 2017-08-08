@@ -1,24 +1,28 @@
-<div ng-controller="TransformVisEditorController as paramCtrl"
-     style="width: 100%;">
+<div ng-controller="TransformVisEditorController as paramCtrl" style="width: 100%;">
 
-            <div class="form-group">
-		    <label> Index Pattern </label> 
-		    <select name="indexPattern" class="form-control ng-pristine ng-untouched" ng-model="$parent.vis.params.outputs.indexpattern" required ng-options="option as option for option in indexPatternOptions"></select>
-            </div>
+  <div class="form-group">
+    <label> Index Pattern </label>
+    <select name="indexPattern" class="form-control ng-pristine ng-untouched"
+            ng-model="$parent.vis.params.outputs.indexpattern" required
+            ng-options="option as option for option in indexPatternOptions"></select>
+  </div>
 
-            <div class="form-group">
-		    <label> Query DSL </label> 
-	        <div ui-ace="{ onLoad: aceLoaded, mode: 'json' }" ng-model="$parent.vis.params.outputs.querydsl" class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm" />
-            </div>
+  <div class="form-group">
+    <label> Query DSL </label>
+    <div ui-ace="{ onLoad: aceLoaded, mode: 'json' }" ng-model="$parent.vis.params.outputs.querydsl"
+         class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
+  </div>
 
-            <div ng-if="options.allow_unsafe" class="form-group">
-		<label> Javascript </label> 
-	        <div ui-ace="{ onLoad: aceLoaded, mode: 'javascript' }" ng-model="$parent.vis.params.outputs.meta" class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm" />
-            </div>
+  <div ng-if="options.allow_unsafe" class="form-group">
+    <label> Javascript </label>
+    <div ui-ace="{ onLoad: aceLoaded, mode: 'javascript' }" ng-model="$parent.vis.params.outputs.meta"
+         class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
+  </div>
 
-            <div class="form-group">
-		<label> Template </label>  
-		  <div ui-ace="{ onLoad: aceLoaded, mode: 'html' }" ng-model="$parent.vis.params.outputs.formula" class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm" />
-            </div>
+  <div class="form-group">
+    <label> Template </label>
+    <div ui-ace="{ onLoad: aceLoaded, mode: 'html' }" ng-model="$parent.vis.params.outputs.formula"
+         class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
+  </div>
 
 </div>
