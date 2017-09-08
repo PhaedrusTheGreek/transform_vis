@@ -26,7 +26,7 @@ Javascript:
 ```
 ({
  percent_fail: function() {
- return Math.round((this.aggregations.parse_failures.doc_count / this.hits.total) * 100);
+ return Math.round((this.response.aggregations.parse_failures.doc_count / this.response.hits.total) * 100);
  }
 })
 ```
@@ -36,7 +36,7 @@ Mustache:
 ```
 <hr>
  <b>Percent Failures: {{meta.percent_fail}}%</b><BR>
- Total Hits: {{hits.total}} <BR>
- Failures: {{aggregations.parse_failures.doc_count}}
+ Total Hits: {{response.hits.total}} <BR>
+ Failures: {{response.aggregations.parse_failures.doc_count}}
 <hr>
 ```
