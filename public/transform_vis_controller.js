@@ -2,6 +2,8 @@
 import { uiModules } from 'ui/modules';
 import { FilterBarQueryFilterProvider } from 'ui/filter_bar/query_filter'
 import { dashboardContextProvider } from 'plugins/kibana/dashboard/dashboard_context'
+import { SavedObjectsClientProvider } from 'ui/saved_objects';
+
 import chrome from 'ui/chrome';
 
 const Mustache = require('mustache');
@@ -39,14 +41,15 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
   $scope.search = function () {
 
     const context = dashboardContext();
-    const index = $scope.vis.params.outputs.indexpattern;
 
     // This is part of what should be a wider config validation
-    if (!(typeof index === 'string' || index instanceof String)) {
+    if ($scope.vis.indexPattern === undefined || $scope.vis.indexPattern.id === undefined) {
       $scope.setDisplay('<div style="text-align: center;"><i>No Index Pattern</i></div>');
       return;
-    }
-
+    } 
+    
+    const index = $scope.vis.indexPattern.title;
+    
     if ($scope.vis.indexPattern && $scope.vis.indexPattern.timeFieldName) {
       const timefilterdsl = {range: {}};
       timefilterdsl.range[$scope.vis.indexPattern.timeFieldName] = {gte: timefilter.time.from, lte: timefilter.time.to};
@@ -109,13 +112,20 @@ module.controller('TransformVisController', function ($scope, $sce, Private, tim
 
 });
 
-module.controller('TransformVisEditorController', function ($scope, indexPatterns) {
+module.controller('TransformVisEditorController', function ($scope, Private, indexPatterns) {
 
   $scope.options = chrome.getInjected('transformVisOptions');
 
-  indexPatterns.getIds().then(function (list) {
-    $scope.indexPatternOptions = list;
+  const savedObjectsClient = Private(SavedObjectsClientProvider);
+  
+  const patterns = savedObjectsClient.find({
+    type: 'index-pattern',
+    fields: ['title'],
+    perPage: 10000
+  }).then(response => {    
+    $scope.indexPatternOptions = response.savedObjects;
   });
+
 
   $scope.$watch('vis.params.outputs.indexpattern', function () {
     indexPatterns.get($scope.vis.params.outputs.indexpattern).then(function (indexPattern) {

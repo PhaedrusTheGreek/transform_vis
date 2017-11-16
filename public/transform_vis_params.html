@@ -4,7 +4,7 @@
     <label> Index Pattern </label>
     <select name="indexPattern" class="form-control ng-pristine ng-untouched"
             ng-model="$parent.vis.params.outputs.indexpattern" required
-            ng-options="option as option for option in indexPatternOptions"></select>
+            ng-options="option.id as option.attributes.title for option in indexPatternOptions"></select>
   </div>
 
   <div class="form-group">

@@ -1,3 +1,9 @@
+* Nov 16 2017
+ * Versions
+    * 5.6.4
+ * Changes
+    * Support changes in Index Pattern service
+
 * Jul 10 2017
  * Versions
     * 5.5.0
