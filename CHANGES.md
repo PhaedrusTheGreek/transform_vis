@@ -1,3 +1,8 @@
+* Nov 17 2017
+ * Versions
+    * 6.0.0
+ * Changes
+    * Total re-org for new visualization framework
 * Nov 16 2017
  * Versions
     * 5.6.4
