@@ -10,10 +10,10 @@ A Kibana visualization plugin that allows arbitrary query results to be processe
    * [An example with Pre-processing](#an-example-with-pre-processing)
 * [Debugging](#debugging)
 
-Installation for Kibana 6.0.0:
+Installation for Kibana 6.1.1:
 
 ```
-bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/6.0.0/transform_vis-6.0.0.zip
+bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/6.1.1/transform_vis-6.1.1.zip
 ```
 
 
