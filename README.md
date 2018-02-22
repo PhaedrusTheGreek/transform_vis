@@ -86,6 +86,8 @@ Template:
 <div id="viz"> </div>
 ```
 
+Find a more detailed D3 recipe in [the examples cookbook](https://github.com/PhaedrusTheGreek/transform_vis/blob/master/RECIPES.md#custom-d3)
+
 ## Support for CSS
 
 `<style>` tags can be embedded in the mustache template, but requires `transform_vis.allow_unsafe: true` in `kibana.yml`
