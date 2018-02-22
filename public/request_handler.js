@@ -13,7 +13,7 @@ export const createRequestHandler = function(Private, es, indexPatterns, $saniti
       return new Promise((resolve, reject) => {
         
         function display_error(message) {
-          resolve(`<div style="text-align: center;"><i>${message}</i></div>`);
+          resolve({ html: `<div style="text-align: center;"><i>${message}</i></div>`});
         }
 
         function search(indexPattern){
@@ -58,9 +58,14 @@ export const createRequestHandler = function(Private, es, indexPatterns, $saniti
                   console.log("Javascript Compilation Error", jserr);
                   return; // Abort!
                 }
-                resolve(Mustache.render(formula, bindme));
+                if (typeof bindme.meta.before_render === "function") { bindme.meta.before_render(); }
+                resolve({ 
+                  html: Mustache.render(formula, bindme), 
+                  after_render: bindme.meta.after_render
+                });
+              
               } else {
-                resolve($sanitize(Mustache.render(formula, bindme)));
+                resolve({ html: $sanitize(Mustache.render(formula, bindme)) });
               }
               
             }

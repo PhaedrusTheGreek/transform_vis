@@ -10,7 +10,8 @@ class VisController {
 
   render(visData, status) {
     return new Promise(resolve => {
-      this.container.innerHTML = visData;
+      this.container.innerHTML = visData.html;
+      if (typeof visData.after_render === "function") { visData.after_render(); }
       resolve('done rendering');
     });
   }
