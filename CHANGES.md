@@ -1,3 +1,9 @@
+
+* Feb 22 2018
+ * Versions
+    * 6.2.2, 6.3.0
+ * Changes
+    * before_render and after_render methods added
 * Nov 17 2017
  * Versions
     * 6.0.0
