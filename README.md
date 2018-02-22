@@ -10,10 +10,10 @@ A Kibana visualization plugin that allows arbitrary query results to be processe
    * [An example with Pre-processing](#an-example-with-pre-processing)
 * [Debugging](#debugging)
 
-Installation for Kibana 6.1.1:
+Installation for Kibana 6.2.2:
 
 ```
-bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/6.1.1/transform_vis-6.1.1.zip
+bin/kibana-plugin install https://github.com/PhaedrusTheGreek/transform_vis/releases/download/6.2.2/transform_vis-6.2.2.zip
 ```
 
 
@@ -55,6 +55,35 @@ Named functions can then be called by mustache, like:
 
 ```
 <hr>{{meta.count_hits}} total hits<hr>
+```
+
+Functions called by mustache are executed before the actual render on the page, so no DOM manipulation can be done.   As of Version 6.2.2, the `before_render` and `after_render` lifecycle hooks will be called automatically.   The former can be used for any pre-processing that might be required before rendering, and the latter should be used for anything that expects the HTML to be rendered. e.g.:
+
+Javascript:
+```
+({
+  after_render: function() {
+
+    var sampleSVG = d3.select("#viz")
+        .append("svg")
+        .attr("width", 100)
+        .attr("height", 100);    
+
+    sampleSVG.append("circle") 
+        .style("stroke", "gray") 
+        .style("fill", "white")
+        .attr("r", 40)
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .on("mouseover", function(){d3.select(this).style("fill", "aliceblue");})
+        .on("mouseout", function(){d3.select(this).style("fill", "white");});
+  }
+}) 
+```
+
+Template:
+```
+<div id="viz"> </div>
 ```
 
 ## Support for CSS
