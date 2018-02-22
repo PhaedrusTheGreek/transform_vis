@@ -1,7 +1,7 @@
 
 * Feb 22 2018
  * Versions
-    * 6.2.2, 6.3.0
+    * 6.2.2, then 6.2.2 re-released again same day with 2 bugs fixed related to after_render
  * Changes
     * before_render and after_render methods added
 * Nov 17 2017
