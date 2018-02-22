@@ -133,6 +133,9 @@ Mustache:
 </style> 
 <div id="viz"> </div>
 
+<pre>
+    {{ meta.debug }}
+</pre>
 
 
 ```
