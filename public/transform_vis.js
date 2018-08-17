@@ -11,7 +11,7 @@ import { createRequestHandler } from './request_handler';
 import optionsTemplate from './options_template.html';
 import 'plugins/transform_vis/editor_controller';
   
-function TransformVisProvider(Private, es, indexPatterns, $sanitize, timefilter) {
+function TransformVisProvider(Private, es, indexPatterns, $sanitize) {
   const VisFactory = Private(VisFactoryProvider);
   
   return VisFactory.createBaseVisualization({
@@ -43,7 +43,7 @@ function TransformVisProvider(Private, es, indexPatterns, $sanitize, timefilter)
     editorConfig: {
       optionsTemplate: optionsTemplate
     },
-    requestHandler: createRequestHandler(Private, es, indexPatterns, $sanitize, timefilter),
+    requestHandler: createRequestHandler(Private, es, indexPatterns, $sanitize),
     responseHandler: 'none',
     options: {
       showIndexSelection: false

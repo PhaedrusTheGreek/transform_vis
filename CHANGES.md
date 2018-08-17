@@ -1,4 +1,6 @@
-
+* Aug 17 2018
+  * Versions
+  * 6.4.0 changes as per https://www.elastic.co/blog/upcoming-kibana-plugin-api-changes-in-6-4
 * Feb 22 2018
  * Versions
     * 6.2.2, then 6.2.2 re-released again same day with 2 bugs fixed related to after_render

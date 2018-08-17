@@ -1,9 +1,10 @@
 import chrome from 'ui/chrome';
 import { dashboardContextProvider } from 'plugins/kibana/dashboard/dashboard_context'
+import { timefilter } from 'ui/timefilter';
 
 const Mustache = require('mustache');
 
-export const createRequestHandler = function(Private, es, indexPatterns, $sanitize, timefilter) {
+export const createRequestHandler = function(Private, es, indexPatterns, $sanitize) {
   
     const myRequestHandler = (vis, appState, uiState, searchSource) => {
   
