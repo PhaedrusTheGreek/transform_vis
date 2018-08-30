@@ -1,13 +1,18 @@
 import chrome from 'ui/chrome';
 import { dashboardContextProvider } from 'plugins/kibana/dashboard/dashboard_context'
-import { timefilter } from 'ui/timefilter';
 
 const Mustache = require('mustache');
 
 export const createRequestHandler = function(Private, es, indexPatterns, $sanitize) {
   
-    const myRequestHandler = (vis, appState, uiState, searchSource) => {
+    const myRequestHandler = (vis, state) => {
   
+      var { appState, uiState, query, filters, timeRange, searchSource } = state;
+
+      /* As per https://github.com/elastic/kibana/issues/17722 dashboard_context will go away soon.
+        The proper way to read the dashboard context is to use `filters` and `query` from the above
+        object, however as of 6.4, these variables are coming up undefined */
+
       const dashboardContext = Private(dashboardContextProvider);
       const options = chrome.getInjected('transformVisOptions');
       
@@ -29,12 +34,20 @@ export const createRequestHandler = function(Private, es, indexPatterns, $saniti
           
           if (indexPattern.timeFieldName) {
             const timefilterdsl = {range: {}};
-            timefilterdsl.range[indexPattern.timeFieldName] = {gte: timefilter.time.from, lte: timefilter.time.to};
+            timefilterdsl.range[indexPattern.timeFieldName] = {gte: timeRange.from, lte: timeRange.to};
             context.bool.must.push(timefilterdsl);
           }
       
           const body = JSON.parse(vis.params.querydsl.replace('"_DASHBOARD_CONTEXT_"', JSON.stringify(context)));
       
+          // Can be used for testing the above commented future change //
+          // console.log("context", JSON.stringify(context));
+          // console.log("searchSource", searchSource);
+          // console.log("state", state);
+          // console.log("query", query);
+          // console.log("filters", filters);
+          // console.log("body", body);
+
           es.search({
             index: indexPattern.title,
             body: body

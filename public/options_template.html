@@ -3,25 +3,24 @@
     <div class="form-group">
       <label> Index Pattern </label>
       <select name="indexPattern" class="form-control ng-pristine ng-untouched"
-              ng-model="vis.params.indexpattern" required
+              ng-model="editorState.params.indexpattern" required
               ng-options="option.id as option.attributes.title for option in indexPatternOptions"></select>
     </div>
   
     <div class="form-group">
       <label> Query DSL </label>
-      <div ui-ace="{ onLoad: aceLoaded, mode: 'json' }" ng-model="vis.params.querydsl"
+      <div ui-ace="{ onLoad: aceLoaded, mode: 'json' }" ng-model="editorState.params.querydsl"
            class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
     </div>
-  
     <div ng-if="options.allow_unsafe" class="form-group">
       <label> Javascript </label>
-      <div ui-ace="{ onLoad: aceLoaded, mode: 'javascript' }" ng-model="vis.params.meta"
+      <div ui-ace="{ onLoad: aceLoaded, mode: 'javascript' }" ng-model="editorState.params.meta"
            class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
     </div>
   
     <div class="form-group">
       <label> Template </label>
-      <div ui-ace="{ onLoad: aceLoaded, mode: 'html' }" ng-model="vis.params.formula"
+      <div ui-ace="{ onLoad: aceLoaded, mode: 'html' }" ng-model="editorState.params.formula"
            class="template-editor form-control ng-pristine ng-untouched ng-valid ng-scope ace_editor ace-tm"/>
     </div>
   
